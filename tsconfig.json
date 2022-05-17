@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist",
+        "rootDir": "src",
+        "module": "commonjs",
+        "strict": false,
+        "target": "es2020",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "esModuleInterop": true,
+        "noUnusedLocals": false,
+        "noUnusedParameters": false,
+        "noImplicitAny": false,
+        "noImplicitThis": true,
+        "resolveJsonModule": true,
+        "sourceMap": false,
+        "declaration": true,
+        "declarationMap": false,
+        "newLine": "LF",
+        "lib": [
+            "esnext",
+            "dom",
+            "es6"
+        ]
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}
