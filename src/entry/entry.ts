@@ -41,6 +41,7 @@ export async function entryDeleteById(id: string): Promise<IResult> {
     }
 
     const entry = await Entry.findById(id);
+
     if (!entry) {
         return {
             status: 404,
@@ -48,7 +49,7 @@ export async function entryDeleteById(id: string): Promise<IResult> {
         }
     }
 
-    await Entry.deleteOne({ id });
+    await Entry.deleteOne({ _id: id });
     return {
         status: 200
     }

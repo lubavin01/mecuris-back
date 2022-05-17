@@ -1,5 +1,6 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import { check } from 'express-validator';
+import { ResponseMiddleware } from '../middleware/reponse.middleware';
 
 import { getEntries, createEntry, getEntryById, deleteEntry, updateEntry } from './entry.controller';
 
@@ -34,3 +35,5 @@ entryRouter.put('/',
 
 entryRouter.delete('/:id',
     deleteEntry)
+
+entryRouter.use(ResponseMiddleware);
