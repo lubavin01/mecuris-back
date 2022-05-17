@@ -124,7 +124,7 @@ export const deleteEntry = async (req: Request, res: Response) => {
             return res.status(400).json(result.array());
         }
 
-        const { id } = req.body;
+        const { id } = req.params;
         const mainResult = await entryDeleteById(id);
 
         if (mainResult.err) {
