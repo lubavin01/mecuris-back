@@ -59,7 +59,8 @@ export const updateEntry = async (req: Request, res: Response, next: NextFunctio
             return res.status(400).json(result.array());
         }
 
-        const { id, color, width, height, depth, positionX, positionY, positionZ } = req.body;
+        const { id } = req.params;
+        const { color, width, height, depth, positionX, positionY, positionZ } = req.body;
         const mainResult = await entryUpdate({ id, color, width, height, depth, positionX, positionY, positionZ });
 
         res.locals.mainResult = mainResult;
