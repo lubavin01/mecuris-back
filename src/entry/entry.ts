@@ -1,6 +1,6 @@
 import { Types } from 'mongoose';
 
-import { Entry } from './entry.model';
+import { Entry, IEntry, IEntryWithId } from './entry.model';
 
 interface IResult {
     status: number,
@@ -41,7 +41,6 @@ export async function entryDeleteById(id: string): Promise<IResult> {
     }
 
     const entry = await Entry.findById(id);
-
     if (!entry) {
         return {
             status: 404,
@@ -55,12 +54,30 @@ export async function entryDeleteById(id: string): Promise<IResult> {
     }
 }
 
-export async function entryCreate(title: string, color: string): Promise<IResult> {
-    const entry = new Entry({ title, color });
+export async function entryCreate(data: IEntry): Promise<IResult> {
+    const { color, width, height, depth, positionX, positionY, positionZ } = data;
+    const entry = new Entry({ color, width, height, depth, positionX, positionY, positionZ });
     await entry.save();
 
     return {
         status: 201,
         data: entry,
+    }
+}
+
+export async function entryUpdate(data: IEntryWithId): Promise<IResult> {
+    const { id, ...update } = data;
+    let entry = await Entry.findById(id);
+    if (!entry) {
+        return {
+            status: 404,
+            err: true,
+        }
+    }
+
+    await Entry.updateOne({ _id: id }, update);
+
+    return {
+        status: 200
     }
 }
