@@ -12,7 +12,9 @@ export default function ResponseMiddleware(req: Request, res: Response) {
         return res.status(mainResult.status).json({ message: mainResult.message });
     }
 
-    const responseData: IResponseData = {};
+    type respData = typeof mainResult.data;
+
+    const responseData: IResponseData<respData> = {};
     if (mainResult.data) {
         responseData.data = mainResult.data;
     }

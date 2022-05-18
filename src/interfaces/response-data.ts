@@ -1,4 +1,4 @@
-export interface IResponseData {
-    data?: any;
+export interface IResponseData<T> {
+    data?: T;
     message?: string;
 }
