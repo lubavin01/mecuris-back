@@ -93,6 +93,7 @@ export async function entryUpdate(id: string, data: IEntry): Promise<IServiceRes
 }
 
 export async function entryPatch(id: string, data: IEntry): Promise<IServiceResult> {
+
     if (!Types.ObjectId.isValid(id)) {
         return {
             status: 400,
@@ -101,7 +102,7 @@ export async function entryPatch(id: string, data: IEntry): Promise<IServiceResu
         }
     }
 
-    let entry = await Entry.findById(id);
+    let entry = (await Entry.findById(id)).toObject();
     if (!entry) {
         return {
             status: 404,
@@ -131,10 +132,10 @@ export async function entryPatch(id: string, data: IEntry): Promise<IServiceResu
     if (data.positionZ !== undefined) {
         toUpdate.positionZ = data.positionZ;
     }
-    await Entry.updateOne({ _id: id }, toUpdate);
+    await Entry.updateOne({ _id: id }, toUpdate, { lean: true });
 
     return {
-        status: 200
+        status: 200,
     }
 
 }

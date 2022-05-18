@@ -98,14 +98,14 @@ export const patchEntry = async (req: Request, res: Response, next: NextFunction
 
         const { id } = req.params;
         const { color, width, height, depth, positionX, positionY, positionZ } = req.body;
-
         const mainResult = await entryPatch(id, { color, width, height, depth, positionX, positionY, positionZ });
         res.locals.mainResult = mainResult;
         return next();
     }
 
     catch (e) {
-
+        res.status(400);
+        res.json({ message: e.message });
     }
 
 }

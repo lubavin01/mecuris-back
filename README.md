@@ -32,7 +32,20 @@ Creates new entry
 * positionY: numeric, optional
 * positionZ: numeric, optional
 
-Updates entry by id parameter entirely
+Updates by id entry object entirely
+
+## api/v1/entries/:id
+### method: PATCH
+### Body parameters:
+* color: hex-value or name, optional
+* width: numeric, optional
+* height: numeric, optional
+* depth: numeric, optional
+* positionX: numeric, optional
+* positionY: numeric, optional
+* positionZ: numeric, optional
+
+Updates by id entry object partially
 
 ## api/v1/entries/:id
 ### method: DELETE

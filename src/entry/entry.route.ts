@@ -2,7 +2,7 @@ import express from 'express';
 import { body } from 'express-validator';
 import { ResponseMiddleware } from '../middleware/reponse.middleware';
 
-import { getEntries, createEntry, getEntryById, deleteEntry, updateEntry } from './entry.controller';
+import { getEntries, createEntry, getEntryById, deleteEntry, updateEntry, patchEntry } from './entry.controller';
 
 export const entryRouter = express.Router();
 
@@ -45,7 +45,7 @@ entryRouter.patch('/:id',
     body('positionX', 'positionX should be integer between -100 and 100').optional().isInt({ min: -100, max: 100 }),
     body('positionY', 'positionY should be integer between -100 and 100').optional().isInt({ min: -100, max: 100 }),
     body('positionZ', 'positionZ should be integer between -100 and 100').optional().isInt({ min: -100, max: 100 }),
-    updateEntry);
+    patchEntry);
 
 // Making Response
 entryRouter.use(ResponseMiddleware);
