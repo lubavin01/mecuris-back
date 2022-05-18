@@ -16,18 +16,18 @@ const entry = new Schema({
     }
 });
 
-export const Entry = model('Entry', entry);
+export const Entry = model<IEntryWithId>('Entry', entry);
 
 export interface IEntry {
-    color: string,
-    width: number,
-    height: number,
-    depth: number,
-    positionX: number,
-    positionY: number,
-    positionZ: number,
+    color?: string,
+    width?: number,
+    height?: number,
+    depth?: number,
+    positionX?: number,
+    positionY?: number,
+    positionZ?: number,
 }
 
 export interface IEntryWithId extends IEntry {
-    id: string,
+    _id: string,
 }

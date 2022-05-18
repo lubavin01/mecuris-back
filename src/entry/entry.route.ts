@@ -6,6 +6,8 @@ import { getEntries, createEntry, getEntryById, deleteEntry, updateEntry } from 
 
 export const entryRouter = express.Router();
 
+// TODO Validate id
+
 entryRouter.get('/', getEntries);
 entryRouter.get('/:id',
     getEntryById);
@@ -33,6 +35,17 @@ entryRouter.put('/:id',
     updateEntry);
 
 entryRouter.delete('/:id',
-    deleteEntry)
+    deleteEntry);
 
+entryRouter.patch('/:id',
+    body('color', 'color should be a valid string').optional().isString(),
+    body('width', 'width should be integer greater than 0').optional().isInt({ gt: 0 }),
+    body('height', 'height should be integer greater than 0').optional().isInt({ gt: 0 }),
+    body('depth', 'depth should be integer greater than 0').optional().isInt({ gt: 0 }),
+    body('positionX', 'positionX should be integer between -100 and 100').optional().isInt({ min: -100, max: 100 }),
+    body('positionY', 'positionY should be integer between -100 and 100').optional().isInt({ min: -100, max: 100 }),
+    body('positionZ', 'positionZ should be integer between -100 and 100').optional().isInt({ min: -100, max: 100 }),
+    updateEntry);
+
+// Making Response
 entryRouter.use(ResponseMiddleware);
