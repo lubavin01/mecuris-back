@@ -1,7 +1,20 @@
-import { Schema, model } from "mongoose";
+import { Schema, model } from 'mongoose';
+
+export interface IEntry {
+    color?: string;
+    width?: number;
+    height?: number;
+    depth?: number;
+    positionX?: number;
+    positionY?: number;
+    positionZ?: number;
+}
+
+export interface IEntryWithId extends IEntry {
+    _id: string;
+}
 
 const entry = new Schema({
-
     color: String,
     width: Number,
     height: Number,
@@ -12,22 +25,8 @@ const entry = new Schema({
 
     createAt: {
         type: Date,
-        default: new Date()
-    }
+        default: new Date(),
+    },
 });
 
 export const Entry = model<IEntryWithId>('Entry', entry);
-
-export interface IEntry {
-    color?: string,
-    width?: number,
-    height?: number,
-    depth?: number,
-    positionX?: number,
-    positionY?: number,
-    positionZ?: number,
-}
-
-export interface IEntryWithId extends IEntry {
-    _id: string,
-}

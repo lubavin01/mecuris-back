@@ -8,7 +8,7 @@ export async function entryFindAll(): Promise<IServiceResult> {
     return {
         status: 200,
         data: entries,
-    }
+    };
 }
 
 export async function entryFindById(id: string): Promise<IServiceResult> {
@@ -17,20 +17,20 @@ export async function entryFindById(id: string): Promise<IServiceResult> {
             status: 400,
             err: true,
             message: 'id should be valid',
-        }
+        };
     }
 
     const entry = await Entry.findById(id);
     if (!entry) {
         return {
-            status: 404
-        }
+            status: 404,
+        };
     }
 
     return {
         status: 200,
-        data: entry
-    }
+        data: entry,
+    };
 }
 
 export async function entryDeleteById(id: string): Promise<IServiceResult> {
@@ -39,7 +39,7 @@ export async function entryDeleteById(id: string): Promise<IServiceResult> {
             status: 400,
             err: true,
             message: 'id should be valid',
-        }
+        };
     }
 
     const entry = await Entry.findById(id);
@@ -48,13 +48,13 @@ export async function entryDeleteById(id: string): Promise<IServiceResult> {
         return {
             status: 404,
             err: true,
-        }
+        };
     }
 
     await Entry.deleteOne({ _id: id });
     return {
-        status: 200
-    }
+        status: 200,
+    };
 }
 
 export async function entryCreate(data: IEntry): Promise<IServiceResult> {
@@ -65,7 +65,7 @@ export async function entryCreate(data: IEntry): Promise<IServiceResult> {
     return {
         status: 201,
         data: entry,
-    }
+    };
 }
 
 export async function entryUpdate(id: string, data: IEntry): Promise<IServiceResult> {
@@ -74,40 +74,39 @@ export async function entryUpdate(id: string, data: IEntry): Promise<IServiceRes
             status: 400,
             err: true,
             message: 'id should be valid',
-        }
+        };
     }
 
-    let entry = await Entry.findById(id);
+    const entry = await Entry.findById(id);
     if (!entry) {
         return {
             status: 404,
             err: true,
-        }
+        };
     }
 
     await Entry.updateOne({ _id: id }, data);
 
     return {
-        status: 200
-    }
+        status: 200,
+    };
 }
 
 export async function entryPatch(id: string, data: IEntry): Promise<IServiceResult> {
-
     if (!Types.ObjectId.isValid(id)) {
         return {
             status: 400,
             err: true,
             message: 'id should be valid',
-        }
+        };
     }
 
-    let entry = (await Entry.findById(id)).toObject();
+    const entry = (await Entry.findById(id)).toObject();
     if (!entry) {
         return {
             status: 404,
             err: true,
-        }
+        };
     }
 
     const toUpdate = { ...entry };
@@ -136,6 +135,5 @@ export async function entryPatch(id: string, data: IEntry): Promise<IServiceResu
 
     return {
         status: 200,
-    }
-
+    };
 }

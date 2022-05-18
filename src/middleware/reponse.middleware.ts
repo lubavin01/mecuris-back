@@ -1,7 +1,7 @@
-import { Request, Response } from "express";
-import { IResponseData } from "../interfaces";
+import { Request, Response } from 'express';
+import { IResponseData } from '../interfaces';
 
-export function ResponseMiddleware(req: Request, res: Response) {
+export default function ResponseMiddleware(req: Request, res: Response) {
     const { mainResult } = res.locals;
 
     if (!mainResult) {
@@ -9,7 +9,7 @@ export function ResponseMiddleware(req: Request, res: Response) {
     }
 
     if (mainResult.err) {
-        return res.status(mainResult.status).json({ message: mainResult.message })
+        return res.status(mainResult.status).json({ message: mainResult.message });
     }
 
     const responseData: IResponseData = {};
