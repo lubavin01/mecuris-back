@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { IResponseData } from "../interfaces";
 
 export function ResponseMiddleware(req: Request, res: Response) {
     const { mainResult } = res.locals;
@@ -11,7 +12,7 @@ export function ResponseMiddleware(req: Request, res: Response) {
         return res.status(mainResult.status).json({ message: mainResult.message })
     }
 
-    const responseData: { data?: any, message?: string } = {};
+    const responseData: IResponseData = {};
     if (mainResult.data) {
         responseData.data = mainResult.data;
     }

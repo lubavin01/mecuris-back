@@ -1,9 +1,8 @@
-import express, { Response } from 'express';
+import express from 'express';
 import { json, urlencoded } from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
 
-import { entryRouter } from './entry/entry.route';
 import { appRouter } from './routes';
 
 const app = express();
