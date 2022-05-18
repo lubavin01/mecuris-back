@@ -1,5 +1,5 @@
-import express, { Request, Response } from 'express';
-import { check } from 'express-validator';
+import express from 'express';
+import { body } from 'express-validator';
 import { ResponseMiddleware } from '../middleware/reponse.middleware';
 
 import { getEntries, createEntry, getEntryById, deleteEntry, updateEntry } from './entry.controller';
@@ -11,24 +11,24 @@ entryRouter.get('/:id',
     getEntryById);
 entryRouter.post('/',
     [
-        check('color', 'color should be a valid string').notEmpty().isString(),
-        check('width', 'width should be numeric').notEmpty().isNumeric(),
-        check('height', 'height should be numeric').notEmpty().isNumeric(),
-        check('depth', 'depth should be numeric').notEmpty().isNumeric(),
-        // check('positionX', 'positionX should be numeric').notEmpty().isNumeric(),
-        // check('positionY', 'positionY should be numeric').notEmpty().isNumeric(),
-        // check('positionZ', 'positionZ should be numeric').notEmpty().isNumeric(),
+        body('color', 'color should be a valid string').notEmpty().isString(),
+        body('width', 'width should be integer greater than 0').isInt({ gt: 0 }),
+        body('height', 'height should be integer greater than 0').isInt({ gt: 0 }),
+        body('depth', 'depth should be integer greater than 0').isInt({ gt: 0 }),
+        body('positionX', 'positionX should be integer between -100 and 100').optional().isInt({ min: -100, max: 100 }),
+        body('positionY', 'positionY should be integer between -100 and 100').optional().isInt({ min: -100, max: 100 }),
+        body('positionZ', 'positionZ should be integer between -100 and 100').optional().isInt({ min: -100, max: 100 }),
     ],
     createEntry);
 entryRouter.put('/:id',
     [
-        check('color', 'color should be a valid string').notEmpty().isString(),
-        check('width', 'width should be numeric').notEmpty().isNumeric(),
-        check('height', 'height should be numeric').notEmpty().isNumeric(),
-        check('depth', 'depth should be numeric').notEmpty().isNumeric(),
-        // check('positionX', 'positionX should be numeric').notEmpty().isNumeric(),
-        // check('positionY', 'positionY should be numeric').notEmpty().isNumeric(),
-        // check('positionZ', 'positionZ should be numeric').notEmpty().isNumeric(),
+        body('color', 'color should be a valid string').notEmpty().isString(),
+        body('width', 'width should be integer greater than 0').isInt({ gt: 0 }),
+        body('height', 'height should be integer greater than 0').isInt({ gt: 0 }),
+        body('depth', 'depth should be integer greater than 0').isInt({ gt: 0 }),
+        body('positionX', 'positionX should be integer between -100 and 100').optional().isInt({ min: -100, max: 100 }),
+        body('positionY', 'positionY should be integer between -100 and 100').optional().isInt({ min: -100, max: 100 }),
+        body('positionZ', 'positionZ should be integer between -100 and 100').optional().isInt({ min: -100, max: 100 }),
     ],
     updateEntry);
 

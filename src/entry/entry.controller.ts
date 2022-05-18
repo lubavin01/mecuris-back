@@ -41,7 +41,7 @@ export const createEntry = async (req: Request, res: Response, next: NextFunctio
             return res.status(400).json(result.array());
         }
 
-        const { color, width, height, depth, positionX, positionY, positionZ } = req.body;
+        const { color, width, height, depth, positionX = 0, positionY = 0, positionZ = 0 } = req.body;
         const mainResult = await entryCreate({ color, width, height, depth, positionX, positionY, positionZ });
 
         res.locals.mainResult = mainResult;
@@ -60,7 +60,7 @@ export const updateEntry = async (req: Request, res: Response, next: NextFunctio
         }
 
         const { id } = req.params;
-        const { color, width, height, depth, positionX, positionY, positionZ } = req.body;
+        const { color, width, height, depth, positionX = 0, positionY = 0, positionZ = 0 } = req.body;
         const mainResult = await entryUpdate({ id, color, width, height, depth, positionX, positionY, positionZ });
 
         res.locals.mainResult = mainResult;
