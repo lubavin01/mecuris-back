@@ -1,7 +1,11 @@
 import { Request, Response } from "express";
 
-export function ResponseMiddleware (req: Request, res: Response) {
+export function ResponseMiddleware(req: Request, res: Response) {
     const { mainResult } = res.locals;
+
+    if (!mainResult) {
+        return res.status(501).json({});
+    }
 
     if (mainResult.err) {
         return res.status(mainResult.status).json({ message: mainResult.message })
